@@ -1,7 +1,7 @@
 
 # What
 
-Spreadsheets for terminal written in C Languadge.
+Spreadsheets for terminal written in C Language.
 
 # Why
 
