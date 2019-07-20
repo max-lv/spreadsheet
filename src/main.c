@@ -1,17 +1,10 @@
 #include <stdio.h>
+#include "constants.h"
+#include "cells.c"
+#include "utils.c"
 
-#define CELL_SIZE 10
-#define CELLS_NUM 10
-#define WORD_MAXSIZE 50
-
-#define MODE_CMD 0
-#define MODE_PUT 1
-#define MODE_CONTENT 2
-
-int getword(char word[]);
 void print_sheet(char cells[]);
-int eq(char a[], char b[]);
-void print_repeat(char c, int times);
+
 
 int main()
 {
@@ -30,9 +23,9 @@ int main()
     do {
         if(len > 0) {
             if(mode == MODE_CMD) {
-                if(eq(word, "q\0")) {
+                if(eq(word, "q")) {
                     return 0;
-                } else if(eq(word, "put\0")) {
+                } else if(eq(word, "put")) {
                     mode = MODE_PUT;
                 } else {
                 }
@@ -61,35 +54,6 @@ int main()
 }
 
 
-int getword(char word[])
-{
-    int i=0;
-    char c;
-    while((c = getchar()) != ' ' && c != '\n' && c != EOF && i < WORD_MAXSIZE-1) {
-        word[i] = c;
-        ++i;
-    }
-
-    if(c==EOF) return -1;
-
-    word[i] = '\0';
-    return i;
-}
-
-
-int eq(char a[], char b[])
-{
-    int i=0;
-    while(a[i] != '\0' && b[i] != '\0') {
-        if(a[i] != b[i]) return 0;
-        ++i;
-    }
-    if(a[i] == '\0' && b[i] == '\0')
-        return 1;
-    return 0;
-}
-
-
 void print_sheet(char cells[])
 {
     char c;
@@ -104,11 +68,3 @@ void print_sheet(char cells[])
     }
 }
 
-
-void print_repeat(char c, int times)
-{
-    for(;times>0;--times) {
-        printf("%c", c);
-    }
-    printf("\n");
-}
